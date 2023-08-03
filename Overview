@@ -1,0 +1,5 @@
+# Title: Car Parking System
+
+# Project Overview:
+  -The Car Parking System is designed to control the entry and exit of vehicles in a parking lot using a password-protected mechanism. 
+  -The system uses a Finite State Machine (FSM) to manage different states, and it controls LEDs and displays to indicate the status of the parking system.

@@ -33,3 +33,28 @@ module tb_parking_system;
  clk = 0;
  forever #10 clk = ~clk;
  end
+
+initial begin
+ // Initialize Inputs
+ reset_n = 0;
+ sensor_entrance = 0;
+ sensor_exit = 0;
+ password_1 = 0;
+ password_2 = 0;
+ // Wait 100 ns for global reset to finish
+ #100;
+      reset_n = 1;
+ #20;
+ sensor_entrance = 1;
+ #1000;
+ sensor_entrance = 0;
+ password_1 = 1;
+ password_2 = 2;
+ #2000;
+ sensor_exit =1;
+ 
+ // Add stimulus here
+// fpga4student.com FPGA projects, Verilog projects, VHDL projects
+ end
+      
+endmodule

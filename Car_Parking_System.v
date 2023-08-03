@@ -31,3 +31,49 @@ module parking_system(
  else 
  counter_wait <= 0;
  end
+
+// Change State
+
+ always @(*)
+ begin
+ case(current_state)
+ IDLE: begin
+         if(sensor_entrance == 1)
+ next_state = WAIT_PASSWORD;
+ else
+ next_state = IDLE;
+ end
+ WAIT_PASSWORD: begin
+ if(counter_wait <= 3)
+ next_state = WAIT_PASSWORD;
+ else 
+ begin
+ if((password_1==2'b01)&&(password_2==2'b10))
+ next_state = RIGHT_PASS;
+ else
+ next_state = WRONG_PASS;
+ end
+ end
+ WRONG_PASS: begin
+ if((password_1==2'b01)&&(password_2==2'b10))
+ next_state = RIGHT_PASS;
+ else
+ next_state = WRONG_PASS;
+ end
+ RIGHT_PASS: begin
+ if(sensor_entrance==1 && sensor_exit == 1)
+ next_state = STOP;
+ else if(sensor_exit == 1)
+ next_state = IDLE;
+ else
+ next_state = RIGHT_PASS;
+ end
+ STOP: begin
+ if((password_1==2'b01)&&(password_2==2'b10))
+ next_state = RIGHT_PASS;
+ else
+ next_state = STOP;
+ end
+ default: next_state = IDLE;
+ endcase
+ end

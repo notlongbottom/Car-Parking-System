@@ -20,3 +20,14 @@ module parking_system(
  else
  current_state = next_state;
  end
+
+ // counter_wait
+ always @(posedge clk or negedge reset_n) 
+ begin
+ if(~reset_n) 
+ counter_wait <= 0;
+ else if(current_state==WAIT_PASSWORD)
+ counter_wait <= counter_wait + 1;
+ else 
+ counter_wait <= 0;
+ end
